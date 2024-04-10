@@ -1,7 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
 dotenv.config();
+const port = process.env.PORT || 3001; 
+
+import userRouter from './routes/user.route.js'
+
+
 
 mongoose
   .connect(process.env.MONGO)
@@ -13,6 +19,15 @@ mongoose
   });
 const app = express();
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+
+app.listen(port, () => {
+  console.log(`Listening on port http://localhost:${port}`);
 });
+
+app.get("/", (req, res) => {
+  // res.send("health cheack is ok");
+  res.json({
+    message: "health cheack is ok",
+  });
+});
+app.use('/api/user',userRouter);

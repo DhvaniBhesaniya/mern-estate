@@ -18,4 +18,9 @@ const userSchema = new Mongoose.Schema({
         unique: true,
 
     },
-});
+},{ timestamps: true});
+
+
+const User = Mongoose.model('User',userSchema);
+
+export default User;

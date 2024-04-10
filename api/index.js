@@ -5,10 +5,12 @@ import dotenv from "dotenv";
 dotenv.config();
 const port = process.env.PORT || 3001; 
 
-import userRouter from './routes/user.route.js'
+// routes
+import userRouter from './routes/user.route.js';
+import authRouter from './routes/auth.route.js';
 
 
-
+// db connection
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
@@ -17,7 +19,13 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+// express framework for building  rest api
 const app = express();
+
+app.use(express.json());
+
+
 
 
 app.listen(port, () => {
@@ -31,3 +39,4 @@ app.get("/", (req, res) => {
   });
 });
 app.use('/api/user',userRouter);
+app.use('/api/auth',authRouter);

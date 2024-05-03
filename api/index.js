@@ -9,6 +9,7 @@ const port = process.env.PORT || 3001;
 // routes
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import listingRouter from './routes/listing.route.js';
 
 
 
@@ -44,6 +45,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/user',userRouter);
 app.use('/api/auth',authRouter);
+app.use('/api/listing', listingRouter)
 
 
 app.use((err,req,res,next) => {

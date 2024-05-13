@@ -29,7 +29,7 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setshowListingsError] = useState(false);
-  const [userListings, setuserListings] = useState([]);
+  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
   // console.log ( formData) ;
@@ -143,35 +143,35 @@ export default function Profile() {
     try {
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data.success === false) {
         setshowListingsError(true);
         return;
       }
-      setuserListings(data);
+      setUserListings(data);
     } catch (error) {
       setshowListingsError(true);
     }
   };
 
-  // const handleListingDelete = async (listingId) => {
-  //   try {
-  //     const res = await fetch(`/api/listing/delete/${listingId}`, {
-  //       method: 'DELETE',
-  //     });
-  //     const data = await res.json();
-  //     if (data.success === false) {
-  //       console.log(data.message);
-  //       return;
-  //     }
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
 
-  //     setUserListings((prev) =>
-  //       prev.filter((listing) => listing._id !== listingId)
-  //     );
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   //----------------------------------------
   //  return part
@@ -294,7 +294,7 @@ export default function Profile() {
 
               <div className='flex flex-col item-center'>
                 <button
-                  // onClick={() => handleListingDelete(listing._id)}
+                  onClick={() => handleListingDelete(listing._id)}
                   className='text-red-700 uppercase'
                 >
                   Delete

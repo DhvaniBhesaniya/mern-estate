@@ -11,6 +11,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function CreateListing() {
   const {currentUser} = useSelector(state => state.user);
+  console.log(currentUser);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({

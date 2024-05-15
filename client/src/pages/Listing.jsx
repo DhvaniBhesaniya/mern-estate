@@ -65,7 +65,7 @@ export default function Listing() {
             {listing.imageUrls.map((url, index) => (
               <SwiperSlide key={index}>
                 <img
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[500px] object-cover "
                   src={url}
                   alt="listing"
                 />

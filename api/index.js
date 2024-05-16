@@ -39,12 +39,12 @@ app.listen(port, () => {
   console.log(`Listening on port http://localhost:${port}`);
 });
 
-app.get("/", (req, res) => {
-  // res.send("health cheack is ok");
-  res.json({
-    message: "routes are working",
-  });
-});
+// app.get("/", (req, res) => {
+//   // res.send("health cheack is ok");
+//   res.json({
+//     message: "routes are working",
+//   });
+// });
 
 app.use('/api/user',userRouter);
 app.use('/api/auth',authRouter);

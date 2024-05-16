@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import path from 'path';
 
 dotenv.config();
 const port = process.env.PORT || 3001; 
@@ -22,6 +23,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const __dirname  = path.resolve();
 
 // express framework for building  rest api
 const app = express();
@@ -45,7 +48,12 @@ app.get("/", (req, res) => {
 
 app.use('/api/user',userRouter);
 app.use('/api/auth',authRouter);
-app.use('/api/listing', listingRouter)
+app.use('/api/listing', listingRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname, 'client','dist','index.html'));
+})
 
 
 app.use((err,req,res,next) => {
